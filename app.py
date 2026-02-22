@@ -110,13 +110,13 @@ with col_target:
     target_count = st.number_input("🎯 Target Packing Count", min_value=1, value=100)
     
     # Status Message Logic (Dynamic HTML)
-    if st.session_state.global_total_count == target_count:
-        st.markdown(f"<h3 style='color: #27ae60; margin-top: 10px;'>✅ TARGET COUNT ({target_count}) REACHED : READY FOR PACKAGING</h3>", unsafe_allow_html=True)
-    elif st.session_state.global_total_count > target_count:
-        st.markdown(f"<h3 style='color: #c0392b; margin-top: 10px;'>⚠️ OVER COUNT: Detected {st.session_state.global_total_count} (Target: {target_count})</h3>", unsafe_allow_html=True)
-    else:
-        st.markdown(f"<h3 style='color: #f39c12; margin-top: 10px;'>⏳ IN PROGRESS: {st.session_state.global_total_count} / {target_count}</h3>", unsafe_allow_html=True)
-
+if st.session_state.global_total_count == target_count:
+    st.markdown(f"<h3 style='color: #27ae60; margin-top: 10px;'>✅ TARGET COUNT ({target_count}) REACHED : READY FOR PACKAGING</h3>", unsafe_allow_html=True)
+elif st.session_state.global_total_count > target_count:
+    st.markdown(f"<h3 style='color: #c0392b; margin-top: 10px;'>⚠️ OVER COUNT: Detected {st.session_state.global_total_count} (Target: {target_count})</h3>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<h3 style='color: #f39c12; margin-top: 10px;'>⏳ IN PROGRESS: {st.session_state.global_total_count} / {target_count}</h3>", unsafe_allow_html=True)
+    
 with col_total:
     st.metric("📦 OVERALL TOTAL DETECTED (Accumulated)", st.session_state.global_total_count)
     st.markdown(f"<h4 style='color: #e67e22; border-left: 4px solid #e67e22; padding-left: 10px;'>🔍 CURRENT VALUE DETECTED: <b>{st.session_state.current_run_count}</b></h4>", unsafe_allow_html=True)
